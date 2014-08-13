@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: org.ambientdynamix:application-api:2.0.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ambientdynamix/application-api/2.0.0/application-api-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ambientdynamix/application-api/2.0.0/application-api-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ambientdynamix/application-api/2.0.0/application-api-2.0.0-sources.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/ambientlabs-dynamix-framework-v2.x-26e83c88d248/src" />
+      <root url="file://$USER_HOME$/Downloads/ambientlabs-dynamix-framework-v2.x-26e83c88d248/src" />
+    </SOURCES>
+  </library>
+</component>

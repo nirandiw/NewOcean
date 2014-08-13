@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <delete>
+    <fileset includes="original-ocean-Core-0.01.jar" dir="D:\intellij projects\ocean\ocean-Core\target"/>
+  </delete>
+</target>
+</project>

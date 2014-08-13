@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextPlugins version="1.0.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<contextPlugin
+		metadataVersion="1.0.0" 
+		repoType="simple-file"
+		id="org.ambientdynamix.contextplugins.ocean"
+		pluginVersion="1.0.0"
+		pluginType="REACTIVE"
+		provider="Ambient Dynamix"       
+		platform="android" 
+		minPlatformVersion="2.1" 
+		minFrameworkVersion="0.9.47" 
+		requiresConfiguration="false"
+		hasConfigurationView="true"
+		runtimeFactoryClass="org.ambientdynamix.contextplugins.ocean.PluginFactory">
+		<name>ocean</name>
+        <description>Automatically generated description, please change</description>
+        <supportedPrivacyRiskLevels>
+            <privacyRiskLevel name="HIGH">Automatically generated reason, please change</privacyRiskLevel>
+        </supportedPrivacyRiskLevels>
+		<supportedContextTypes>
+			<contextType>org.ambientdynamix.contextplugins.ocean.mycontextsnapshot</contextType>
+		</supportedContextTypes>		
+		<featureDependencies/>			
+		<permissions>
+		    <permission>Context.ACTIVITY_SERVICE</permission>
+            <permission>Permissions.ACCESS_FULL_CONTEXT</permission>
+            <permission>permissions.MANAGE_BROADCAST_RECEIVERS</permission>
+		</permissions>
+		<installUrl>dynamix/ocean-Core-0.01.jar</installUrl>
+		<updateUrl></updateUrl>
+		<updateMessage priority="OPTIONAL"></updateMessage>
+	</contextPlugin>
+</contextPlugins>

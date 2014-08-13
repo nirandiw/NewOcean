@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.ambientdynamix</groupId>
+        <artifactId>ocean</artifactId>
+        <version>0.01</version>
+    </parent>
+    <artifactId>ocean-Core</artifactId>
+    <packaging>jar</packaging>
+
+    <organization>
+        <name>Ambientdynamix</name>
+    </organization>
+    <name>ocean-Core</name>
+    <description>ocean-Core</description>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>org.ambientdynamix:ocean-Datatypes</artifact>
+                                    <includes>
+                                        <include>**/*.class</include>
+                                        <include>**/*.aidl</include>
+                                    </includes>
+                                </filter>
+                            </filters>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--plugin>
+                <groupId>com.github.goldin</groupId>
+                <artifactId>copy-maven-plugin</artifactId>
+                <version>0.2.5</version>
+                <executions>
+                    <execution>
+                        <id>move-dex</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <resource>
+                                <move>true</move>
+                                <targetPath>${project.build.outputDirectory}</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <includes>
+                                    <include>classes.dex</include>
+                                </includes>
+                            </resource>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>remove-shade-original-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <resource>
+                                <clean>true</clean>
+                                <targetPath>${project.build.directory}</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <includes>
+                                    <include>original-${project.artifactId}-${project.version}.jar</include>
+                                </includes>
+                            </resource>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>move-dex</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy file="${project.build.directory}/classes.dex"
+                                      tofile="${project.build.outputDirectory}/classes.dex"/>
+                                <delete>
+                                    <fileset dir="${project.build.directory}" includes="*.dex" />
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>remove-shade-original-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete>
+                                    <fileset dir="${project.build.directory}" includes="original-${project.artifactId}-${project.version}.jar" />
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven-bundle-plugin -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <!-- configure plugin to generate MANIFEST.MF -->
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- configure plugin to support jar packaging -->
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+
+                        <Export-Package>org.ambientdynamix.contextplugins.ocean</Export-Package>
+                        <Import-Package>org.ambientdynamix.api.application,
+                            org.ambientdynamix.api.contextplugin,
+                            org.ambientdynamix.api.contextplugin.security</Import-Package>
+                        <Bundle-ClassPath>.</Bundle-ClassPath>
+                        <Bundle-Activator />
+                        <Bundle-SymbolicName>org.ambientdynamix.contextplugins.ocean</Bundle-SymbolicName>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>${android.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>dex</goal>
+                        </goals>
+                        <configuration>
+                            <attachJar>false</attachJar>
+                            <dexNoLocals>true</dexNoLocals>
+                            <sdk>
+                                <path>/${env.ANDROID_HOME}</path>
+                                <platform>${api-level}</platform>
+                            </sdk>
+                            <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push plugin to device</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <sdk>
+                                <platform>${api-level}</platform>
+                            </sdk>
+                            <push>
+                                <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+                                <destination>/mnt/sdcard/dynamix/</destination>
+                            </push>
+                            <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push plugin xml to device</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <sdk>
+                                <platform>${api-level}</platform>
+                            </sdk>
+                            <push>
+                                <source>${pom.basedir}/src/main/resources/oceanDescriptor.xml</source>
+                                <destination>/mnt/sdcard/dynamix/</destination>
+                            </push>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven-jar-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <!-- configure plugin to use MANIFEST.MF generated by maven-bundle-plugin -->
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                </configuration>
+            </plugin>
+
+
+            <!-- other plugins ... -->
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.ambientdynamix</groupId>
+            <artifactId>ocean-Datatypes</artifactId>
+            <version>0.01</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ambientdynamix</groupId>
+            <artifactId>logger-Datatypes</artifactId>
+            <version>0.01</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ocean.iml" filepath="$PROJECT_DIR$/ocean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ocean-Core/ocean-Core.iml" filepath="$PROJECT_DIR$/ocean-Core/ocean-Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ocean-Datatypes/ocean-Datatypes.iml" filepath="$PROJECT_DIR$/ocean-Datatypes/ocean-Datatypes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ocean-TestApp/ocean-TestApp.iml" filepath="$PROJECT_DIR$/ocean-TestApp/ocean-TestApp.iml" />
+    </modules>
+  </component>
+</project>
+

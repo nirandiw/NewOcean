@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1407907800420
+Build-Jdk: 1.8.0
+Built-By: workshop
+Bundle-ClassPath: .
+Bundle-Description: ocean-Core
+Bundle-ManifestVersion: 2
+Bundle-Name: ocean-Core
+Bundle-SymbolicName: org.ambientdynamix.contextplugins.ocean
+Bundle-Vendor: Ambientdynamix
+Bundle-Version: 0.01.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.ambientdynamix.contextplugins.ocean;uses:="org.ambie
+ ntdynamix.api.contextplugin,org.ambientdynamix.api.application,org.ambi
+ entdynamix.api.contextplugin.security";version="0.01.0"
+Import-Package: org.ambientdynamix.api.application,org.ambientdynamix.ap
+ i.contextplugin,org.ambientdynamix.api.contextplugin.security
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0
