@@ -64,7 +64,7 @@ public class oceanRuntime extends ContextPluginRuntime {
         this.setPowerScheme(powerScheme);
         // Store our secure context
         this.context = this.getSecuredContext();
-        Log.i(TAG, "Init v3.42");
+        Log.i(TAG, "Init v3.42.git1");
     }
 
     /**
