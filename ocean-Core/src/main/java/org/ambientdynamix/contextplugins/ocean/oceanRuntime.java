@@ -46,7 +46,7 @@ public class oceanRuntime extends ContextPluginRuntime {
     private final String TAG = this.getClass().getSimpleName();
     // Our secure context
     private Context context;
-    private StringBuffer contextSnapShot = new StringBuffer("Ocean Testing with invoke plugin v3.41");
+    private StringBuffer contextSnapShot = new StringBuffer("Ocean Testing with invoke plugin v3.42");
 
     private DynamixFacade dynamix;
     private ContextHandler handler;
@@ -64,7 +64,7 @@ public class oceanRuntime extends ContextPluginRuntime {
         this.setPowerScheme(powerScheme);
         // Store our secure context
         this.context = this.getSecuredContext();
-        Log.i(TAG, "Init v3.41");
+        Log.i(TAG, "Init v3.42");
     }
 
     /**
